@@ -12,20 +12,46 @@
   </header>
 
   <main>
-    <label for="birthdate">Введи дату рождения:</label>
-    <input type="date" id="birthdate">
+    <label for="day">День:</label>
+    <input type="number" id="day" min="1" max="31">
+    
+    <label for="month">Месяц:</label>
+    <input type="number" id="month" min="1" max="12">
+    
+    <label for="year">Год:</label>
+    <input type="number" id="year" min="1900" max="2100">
+    
     <button onclick="calculateMatrix()">Рассчитать</button>
   </main>
 
   <script>
     function calculateMatrix() {
-      const birthdate = document.getElementById('birthdate').value;
-      if (!birthdate) {
-        alert('Пожалуйста, введите дату рождения');
+      const day = document.getElementById('day').value;
+      const month = document.getElementById('month').value;
+      const year = document.getElementById('year').value;
+
+      if (!day || !month || !year) {
+        alert('Пожалуйста, введите все значения');
+        return;
+      }
+
+      if (day < 1 || day > 31) {
+        alert('День должен быть от 1 до 31');
+        return;
+      }
+
+      if (month < 1 || month > 12) {
+        alert('Месяц должен быть от 1 до 12');
+        return;
+      }
+
+      if (year < 1900 || year > 2100) {
+        alert('Год должен быть от 1900 до 2100');
         return;
       }
 
       // Пример сохранения в localStorage
+      const birthdate = `${day}.${month}.${year}`;
       localStorage.setItem('birthdate', birthdate);
 
       // Пока без формул — просто делаем переход
