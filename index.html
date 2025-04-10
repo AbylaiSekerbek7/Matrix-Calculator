@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Расчёт Матрицы</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Расчёт Матрицы</h1>
+  </header>
+
+  <main>
+    <label for="birthdate">Введи дату рождения:</label>
+    <input type="date" id="birthdate">
+    <button onclick="calculateMatrix()">Рассчитать</button>
+  </main>
+
+  <script>
+    function calculateMatrix() {
+      const birthdate = document.getElementById('birthdate').value;
+      if (!birthdate) {
+        alert('Пожалуйста, введите дату рождения');
+        return;
+      }
+
+      // Пример сохранения в localStorage
+      localStorage.setItem('birthdate', birthdate);
+
+      // Пока без формул — просто делаем переход
+      window.location.href = 'results.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результаты Матрицы</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <button onclick="goBack()">← Назад</button>
+    <h1>Расчёт Матрицы</h1>
+  </header>
+
+  <main>
+    <div class="large-label">Дата рождения: <span id="birthDate"></span></div>
+    <div class="large-label">Доп. числа: <span id="extraNumbers"></span></div>
+
+    <div class="grid">
+      <div class="cell">Число судьбы: <span id="destiny">–</span></div>
+      <div class="cell">Темперамент: <span id="temper">–</span></div>
+      <div class="cell">Характер: <span id="character">–</span></div>
+      <div class="cell">Здоровье: <span id="health">–</span></div>
+      <div class="cell">Удача: <span id="luck">–</span></div>
+      <div class="cell">Цель: <span id="goal">–</span></div>
+      <div class="cell">Энергия: <span id="energy">–</span></div>
+      <div class="cell">Логика: <span id="logic">–</span></div>
+      <div class="cell">Долг: <span id="duty">–</span></div>
+      <div class="cell">Семья: <span id="family">–</span></div>
+      <div class="cell">Интерес: <span id="interest">–</span></div>
+      <div class="cell">Труд: <span id="work">–</span></div>
+      <div class="cell">Память: <span id="memory">–</span></div>
+      <div class="cell">Привычки: <span id="habits">–</span></div>
+      <div class="cell">Быт: <span id="life">–</span></div>
+    </div>
+  </main>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    const birthDate = localStorage.getItem('birthdate') || 'Не указана';
+    document.getElementById('birthDate').textContent = birthDate;
+
+    // Пока временные значения
+    document.getElementById('extraNumbers').textContent = '15, 6, 13, 4';
+    document.getElementById('destiny').textContent = '6';
+    document.getElementById('temper').textContent = '3';
+    document.getElementById('character').textContent = '1111';
+    document.getElementById('health').textContent = '44';
+    document.getElementById('luck').textContent = '7';
+    document.getElementById('goal').textContent = '7';
+    document.getElementById('energy').textContent = '2';
+    document.getElementById('logic').textContent = '5';
+    document.getElementById('duty').textContent = '–';
+    document.getElementById('family').textContent = '2';
+    document.getElementById('interest').textContent = '3';
+    document.getElementById('work').textContent = '6';
+    document.getElementById('memory').textContent = '–';
+    document.getElementById('habits').textContent = '2';
+    document.getElementById('life').textContent = '4';
+  </script>
+</body>
+</html>
