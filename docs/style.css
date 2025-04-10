@@ -45,7 +45,7 @@ main {
   box-sizing: border-box;
 }
 
-input[type="number"] {
+input[type="text"] {
   padding: 0.5rem;
   font-size: 1rem;
   width: 100%;
@@ -71,7 +71,7 @@ button:hover {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 2rem;
 }
@@ -85,6 +85,18 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #5d4037;
+}
+
+.number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2e2b25;
 }
 
 .large-label {
@@ -103,12 +115,12 @@ button:hover {
 @media (max-width: 500px) {
   main {
       padding: 1rem;
-    }
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    .cell {
-        font-size: 1rem;
-        padding: 1rem;
-    }
+  }
+  .grid {
+      grid-template-columns: 1fr;
+  }
+  .cell {
+      font-size: 1rem;
+      padding: 1rem;
+  }
 }

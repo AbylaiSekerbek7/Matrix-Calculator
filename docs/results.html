@@ -14,25 +14,52 @@
 
   <main>
     <div class="large-label">Дата рождения: <span id="birthDate"></span></div>
-    <div class="large-label">Доп. числа: <span id="extraNumbers"></span></div>
+    <div class="large-label">Технический расклад: <span id="technicalLayout"></span></div>
 
     <div class="grid">
-      <div class="cell">Число судьбы: <span id="destiny">–</span></div>
-      <div class="cell">Темперамент: <span id="temper">–</span></div>
-      <div class="cell">Характер: <span id="character">–</span></div>
-      <div class="cell">Здоровье: <span id="health">–</span></div>
-      <div class="cell">Удача: <span id="luck">–</span></div>
-      <div class="cell">Цель: <span id="goal">–</span></div>
-      <div class="cell">Энергия: <span id="energy">–</span></div>
-      <div class="cell">Логика: <span id="logic">–</span></div>
-      <div class="cell">Долг: <span id="duty">–</span></div>
-      <div class="cell">Семья: <span id="family">–</span></div>
-      <div class="cell">Интерес: <span id="interest">–</span></div>
-      <div class="cell">Труд: <span id="work">–</span></div>
-      <div class="cell">Память: <span id="memory">–</span></div>
-      <div class="cell">Привычки: <span id="habits">–</span></div>
-      <div class="cell">Быт: <span id="life">–</span></div>
+      <!-- 1 4 7 -->
+      <div class="cell">
+        <div class="label">Характер</div>
+        <div id="1" class="number">–</div>
+      </div>
+      <div class="cell">
+        <div class="label">Здоровье</div>
+        <div id="4" class="number">–</div>
+      </div>
+      <div class="cell">
+        <div class="label">Счастье</div>
+        <div id="7" class="number">–</div>
+      </div>
+    
+      <!-- 2 5 8 -->
+      <div class="cell">
+        <div class="label">Энергия</div>
+        <div id="2" class="number">–</div>
+      </div>
+      <div class="cell">
+        <div class="label">Сердечность</div>
+        <div id="5" class="number">–</div>
+      </div>
+      <div class="cell">
+        <div class="label">Удача</div>
+        <div id="8" class="number">–</div>
+      </div>
+    
+      <!-- 3 6 9 -->
+      <div class="cell">
+        <div class="label">Талант</div>
+        <div id="3" class="number">–</div>
+      </div>
+      <div class="cell">
+        <div class="label">Труд</div>
+        <div id="6" class="number">–</div>
+      </div>
+      <div class="cell">
+        <div class="label">Память</div>
+        <div id="9" class="number">–</div>
+      </div>
     </div>
+    
   </main>
 
   <script>
@@ -40,26 +67,81 @@
       window.history.back();
     }
 
-    const birthDate = localStorage.getItem('birthdate') || 'Не указана';
-    document.getElementById('birthDate').textContent = birthDate;
+    // Получаем дату рождения из localStorage
+    const birthDate = localStorage.getItem('birthdate');  // Для теста установим дату
 
-    // Пока временные значения
-    document.getElementById('extraNumbers').textContent = '15, 6, 13, 4';
-    document.getElementById('destiny').textContent = '6';
-    document.getElementById('temper').textContent = '3';
-    document.getElementById('character').textContent = '1111';
-    document.getElementById('health').textContent = '44';
-    document.getElementById('luck').textContent = '7';
-    document.getElementById('goal').textContent = '7';
-    document.getElementById('energy').textContent = '2';
-    document.getElementById('logic').textContent = '5';
-    document.getElementById('duty').textContent = '–';
-    document.getElementById('family').textContent = '2';
-    document.getElementById('interest').textContent = '3';
-    document.getElementById('work').textContent = '6';
-    document.getElementById('memory').textContent = '–';
-    document.getElementById('habits').textContent = '2';
-    document.getElementById('life').textContent = '4';
-  </script>
+    // Форматируем дату в формат dd.mm.yyyy
+    const formattedDate = birthDate.replace(/\//g, '.');
+    document.getElementById('birthDate').textContent = formattedDate;
+
+    // Функция для подсчета суммы цифр
+    function sumDigits(str) {
+      return str.split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+    }
+
+    // Рассчитываем технический расклад
+    function calculateTechnicalLayout(birthDate) {
+      // Убедимся, что дата передана в формате dd/mm/yyyy
+      const parts = birthDate.split('/');
+      if (parts.length !== 3) {
+        return { first: 'Ошибка в дате', second: 'Ошибка в дате' };
+      }
+      
+      // Извлекаем день, месяц и год
+      const [day, month, year] = parts;
+
+      // Проверяем, что день, месяц и год - это числа
+      if (isNaN(day) || isNaN(month) || isNaN(year)) {
+        return { first: 'Ошибка в дате', second: 'Ошибка в дате' };
+      }
+
+      const dateDigits = day + month + year; // Все цифры из даты рождения
+
+      // Первый технический расклад
+      const sumOfDigits = sumDigits(dateDigits);
+      const firstTechnical = sumDigits(sumOfDigits.toString()); // Сумма всех цифр
+
+      let firstDigitOfDay = 0;
+
+      // Второй технический расклад: если день меньше 10, берем вторую цифру
+      if (parseInt(day) < 10) {
+        firstDigitOfDay = parseInt(day[1]); // Вторая цифра
+      } else {
+        firstDigitOfDay = parseInt(day[0]); // Первая цифра
+      }
+
+      // Второй технический расклад
+      const secondTechnical = sumOfDigits - (firstDigitOfDay * 2);
+      const sumOfSecond = sumDigits(secondTechnical.toString());
+
+      return {
+        first: `${sumOfDigits}${firstTechnical}`,
+        second: `${secondTechnical}${sumOfSecond}`
+      };
+    }
+
+    // Расчитаем и отобразим технический расклад
+    const { first, second } = calculateTechnicalLayout(birthDate);
+    document.getElementById('technicalLayout').textContent = `${first} ${second}`;
+
+    function cntDigits(birthDate, fst, scnd) {
+      let parts = birthDate.split('/');
+      let allDigits = parts.join('') + fst.toString() + scnd.toString(); // Объединяем все части
+      console.log('Все цифры:', allDigits);
+
+      // Обход цифр от 1 до 9
+      for (let i = 1; i <= 9; i++) {
+        const count = allDigits.split('').filter(d => d === i.toString()).length;
+        const output = count > 0 ? i.toString().repeat(count) : '–';
+        console.log(`${i}: ${output}`);
+        // Если на странице есть элемент с id=i, можно вставить туда результат
+        const el = document.getElementById(i.toString());
+        if (el) el.textContent = output;
+      }
+    }
+    cntDigits(birthDate, first, second)
+
+</script>
+
 </body>
 </html>
